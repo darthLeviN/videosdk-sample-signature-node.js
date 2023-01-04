@@ -23,7 +23,8 @@ app.post('/', (req, res) => {
     tpc: req.body.sessionName,
     role_type: req.body.role,
     user_identity: req.body.userIdentity,
-    session_key: req.body.sessionKey,
+    //session_key: req.body.sessionKey,
+    pwd : req.body.pwd,
     version: 1,
     iat: iat,
     exp: exp
@@ -34,7 +35,8 @@ app.post('/', (req, res) => {
   const signature = KJUR.jws.JWS.sign('HS256', sHeader, sPayload, process.env.ZOOM_VIDEO_SDK_SECRET)
 
   res.json({
-    signature: signature
+    signature: signature,
+    payload: req.body
   })
 })
 
